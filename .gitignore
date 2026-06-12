@@ -69,3 +69,14 @@ env/
 # Secrets (never commit API keys)
 .env
 *.env
+
+@"
+# Runtime-generated files
+features.parquet
+output/
+pickle/model.pkl
+__pycache__/
+*.pyc
+.DS_Store
+.env
+"@ | Out-File -FilePath .gitignore -Encoding utf8
