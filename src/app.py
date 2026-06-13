@@ -125,7 +125,7 @@ def main():
     with st.container():
         st.header('Data Ingestion Hub')
         uploaded = st.file_uploader('Upload raw marketing CSVs (GA4, Shopify, ad exports)', accept_multiple_files=True, type=['csv'])
-        features_path = ROOT / 'data' / 'features.parquet'
+        features_path = ROOT / 'features.parquet'
 
         if uploaded and st.button('Normalize & Generate Features'):
             with st.spinner('Normalizing and generating features...'):
@@ -144,7 +144,7 @@ def main():
             preview_cols = [c for c in ['normalized_date', 'channel', 'campaign_name', 'spend', 'revenue'] if c in df.columns]
             st.dataframe(df[preview_cols].sort_values('normalized_date').head(50))
         except Exception as e:
-            st.error(f'Unable to read data/features.parquet: {e}')
+            st.error(f'Unable to read features.parquet: {e}')
 
     # Sidebar: sliders and horizon
     st.sidebar.header('Scenario & Budget Simulator')
@@ -167,9 +167,9 @@ def main():
     horizon = st.sidebar.radio('Planning Horizon', (30, 60, 90), index=0)
 
     # Ensure model exists or offer training
-    model_path = ROOT / 'models' / 'model.pkl'
+    model_path = ROOT / 'pickle' / 'model.pkl'
     if not model_path.exists():
-        if st.sidebar.button('Train Model (creates models/model.pkl)'):
+        if st.sidebar.button('Train Model (creates pickle/model.pkl)'):
             with st.sidebar.spinner('Training probabilistic models — this may take a moment...'):
                 cmd = [sys.executable, str(SRC_PATH / 'train.py')]
                 proc = subprocess.run(cmd, capture_output=True, text=True)
@@ -230,7 +230,7 @@ def main():
                 st.markdown(f"**{ch}**: > {insight}")
 
     else:
-        st.info('Upload CSVs and generate `data/features.parquet`, then train a model (if missing) to enable interactive forecasting.')
+        st.info('Upload CSVs and generate `features.parquet`, then train a model (if missing) to enable interactive forecasting.')
 
 
 if __name__ == '__main__':

@@ -5,10 +5,10 @@ import lightgbm as lgb
 
 def train_probabilistic_models():
     print("[*] Loading processed features for training...")
-    if not os.path.exists('data/features.parquet'):
-        raise FileNotFoundError("Missing 'data/features.parquet'. Please run the feature generation step first.")
+    if not os.path.exists('features.parquet'):
+        raise FileNotFoundError("Missing 'features.parquet'. Please run the feature generation step first.")
         
-    df = pd.read_parquet('data/features.parquet')
+    df = pd.read_parquet('features.parquet')
     X = df[['spend', 'month', 'day_of_week']] 
     y = df['revenue']
 
@@ -30,8 +30,8 @@ def train_probabilistic_models():
         model.fit(X, y)
         model_bundle[quantile_key] = model
 
-    os.makedirs('models', exist_ok=True)
-    model_output_path = os.path.join('models', 'model.pkl')
+    os.makedirs('pickle', exist_ok=True)
+    model_output_path = os.path.join('pickle', 'model.pkl')
     
     with open(model_output_path, 'wb') as f:
         pickle.dump(model_bundle, f)

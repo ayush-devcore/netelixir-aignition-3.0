@@ -37,8 +37,8 @@ env/
 .ipynb_checkpoints/
 
 # Runtime-generated artifacts
-data/features.parquet
-models/model.pkl
+features.parquet
+pickle/model.pkl
 output/
 
 # Secrets

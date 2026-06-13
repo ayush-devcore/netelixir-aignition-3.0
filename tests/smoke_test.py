@@ -21,7 +21,7 @@ def run_script(script_relpath, argv=None):
 
 def main():
     # Clean previous artifacts to ensure deterministic run
-    for p in ['data/features.parquet', 'models/model.pkl', 'output/predictions.csv', 'output/predictions_from_refactor.csv']:
+    for p in ['features.parquet', 'pickle/model.pkl', 'output/predictions.csv', 'output/predictions_from_refactor.csv']:
         fp = ROOT / p
         if fp.exists():
             try:
@@ -34,20 +34,20 @@ def main():
     (ROOT / 'output').mkdir(parents=True, exist_ok=True)
 
     print('[*] Running feature generation...')
-    run_script('src/generate_features.py', ['--data-dir', './data', '--out', 'data/features.parquet'])
+    run_script('src/generate_features.py', ['--data-dir', './data', '--out', 'features.parquet'])
 
-    if not (ROOT / 'data' / 'features.parquet').exists():
-        print('[ERROR] data/features.parquet was not created')
+    if not (ROOT / 'features.parquet').exists():
+        print('[ERROR] features.parquet was not created')
         sys.exit(2)
 
     print('[*] Running training...')
     run_script('src/train.py')
-    if not (ROOT / 'models' / 'model.pkl').exists():
+    if not (ROOT / 'pickle' / 'model.pkl').exists():
         print('[ERROR] model.pkl was not created')
         sys.exit(3)
 
     print('[*] Running prediction CLI...')
-    run_script('src/predict.py', ['--features', 'data/features.parquet', '--model', './models/model.pkl', '--output', './output/predictions.csv'])
+    run_script('src/predict.py', ['--features', 'features.parquet', '--model', './pickle/model.pkl', '--output', './output/predictions.csv'])
 
     out_path = ROOT / 'output' / 'predictions.csv'
     if not out_path.exists():
