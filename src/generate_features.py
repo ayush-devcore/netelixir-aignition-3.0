@@ -203,7 +203,7 @@ def main():
     print(f"    Rows: {len(master_df)} | "
           f"Channels: {master_df['channel'].nunique()} | "
           f"Campaigns: {master_df['campaign_name'].nunique()} | "
-          f"Date range: {master_df['normalized_date'].min().date()} → "
+          f"Date range: {master_df['normalized_date'].min().date()} to "
           f"{master_df['normalized_date'].max().date()}")
 
 
