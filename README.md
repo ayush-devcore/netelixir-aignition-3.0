@@ -28,12 +28,12 @@ Output is written to `./output/predictions.csv`.
 | Argument | Description | Default |
 |---|---|---|
 | `DATA_DIR` | Folder containing raw CSV data files | `./data` |
-| `MODEL_PATH` | Path to the serialised model bundle | `./pickle/model.pkl` |
+| `MODEL_PATH` | Path to the serialised model bundle | `./models/model.pkl` |
 | `OUTPUT_PATH` | Destination for the predictions CSV | `./output/predictions.csv` |
 
 **Example (explicit paths):**
 ```bash
-./run.sh ./data ./pickle/model.pkl ./output/predictions.csv
+./run.sh ./data ./models/model.pkl ./output/predictions.csv
 ```
 
 If `DATA_DIR` contains no CSV files, the pipeline auto-generates a synthetic sample dataset so you can verify the full execution flow on a clean clone.
@@ -48,12 +48,16 @@ netelixir-aignition-3.0/
 ├── requirements.txt        # Pinned Python dependencies
 ├── data/                   # Drop CSV files here; replaced at test time
 │   └── sample_marketing_data.csv
-├── pickle/
-│   └── model.pkl           # Pre-trained LightGBM quantile model bundle
+├── models/
+│   └── model.pkl           # Serialized LightGBM quantile model bundle
 ├── src/
+│   ├── app.py                # Streamlit app wrapper
 │   ├── generate_features.py   # Data ingestion & feature engineering
+│   ├── train.py               # Model training pipeline
 │   └── predict.py             # Probabilistic inference & causal summaries
-├── DEVELOPER_DOCS.md       # Technical documentation & architecture overview
+├── docs/
+│   ├── CONTRIBUTING.md
+│   └── DEVELOPER_DOCS.md
 └── README.md
 ```
 

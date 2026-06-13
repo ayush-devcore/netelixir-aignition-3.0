@@ -192,9 +192,9 @@ def predict_from_features(
 
 def main():
     parser = argparse.ArgumentParser(description="AIgnition 3.0 — Inference & Simulation Engine")
-    parser.add_argument("--features", type=str, default="features.parquet",
+    parser.add_argument("--features", type=str, default="data/features.parquet",
                         help="Path to compiled features parquet")
-    parser.add_argument("--model",    type=str, default="./pickle/model.pkl",
+    parser.add_argument("--model",    type=str, default="./models/model.pkl",
                         help="Path to serialised model bundle")
     parser.add_argument("--output",   type=str, default="./output/predictions.csv",
                         help="Destination path for predictions CSV")

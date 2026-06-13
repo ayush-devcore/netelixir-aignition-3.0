@@ -32,10 +32,10 @@ pip install -r requirements.txt
 
 4) (Optional) Generate features locally
 
-This step will normalize CSVs in `./data` and create `features.parquet`.
+This step will normalize CSVs in `./data` and create `data/features.parquet`.
 
 ```bash
-python src/generate_features.py --data-dir ./data --out features.parquet
+python src/generate_features.py --data-dir ./data --out data/features.parquet
 ```
 
 5) Run the smoke test (REQUIRED before opening a PR)

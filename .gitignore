@@ -26,57 +26,21 @@ venv/
 ENV/
 env/
 
-# IDE
+# IDE/editor
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# ML Pipeline artifacts
-features.parquet
-pickle/model.pkl
-output/predictions.csv
-output/predictions_from_refactor.csv
-
-# Streamlit
-.streamlit/
-
-
-# Runtime-generated files (never commit these)
-features.parquet
-output/
-
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-
-# Virtual environments
-venv/
-.venv/
-env/
-
-# IDE
-.vscode/
-.idea/
 *.DS_Store
 
 # Jupyter
 .ipynb_checkpoints/
 
-# Secrets (never commit API keys)
+# Runtime-generated artifacts
+data/features.parquet
+models/model.pkl
+output/
+
+# Secrets
 .env
 *.env
-
-@"
-# Runtime-generated files
-features.parquet
-output/
-pickle/model.pkl
-__pycache__/
-*.pyc
-.DS_Store
-.env
-"@ | Out-File -FilePath .gitignore -Encoding utf8

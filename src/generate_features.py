@@ -149,7 +149,7 @@ def main():
     parser = argparse.ArgumentParser(description="AIgnition 3.0 — Feature Engineering Pipeline")
     parser.add_argument("--data-dir", type=str, default="./data",
                         help="Directory containing raw CSV data files")
-    parser.add_argument("--out",      type=str, default="features.parquet",
+    parser.add_argument("--out",      type=str, default="./data/features.parquet",
                         help="Output path for compiled features parquet")
     args = parser.parse_args()
 
